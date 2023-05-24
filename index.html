@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Form and Table Example</h1>
+    <p id="description">This is an example form and table implementation.</p>
+
+    <form id="form">
+        <div class="form-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" placeholder="Enter your first name" required><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" placeholder="Enter your last name" required><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" placeholder="Enter your address" required></textarea><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="pincode">Pin Code:</label>
+            <input type="text" id="pincode" placeholder="Enter your pin code" required><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other" required>
+            <label for="other">Other</label><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="food">Food:</label>
+            <input type="checkbox" id="pizza" name="food" value="pizza">
+            <label for="pizza">Pizza</label>
+            <input type="checkbox" id="burger" name="food" value="burger">
+            <label for="burger">Burger</label>
+            <input type="checkbox" id="sushi" name="food" value="sushi">
+            <label for="sushi">Sushi</label>
+            <input type="checkbox" id="pasta" name="food" value="pasta">
+            <label for="pasta">Pasta</label>
+            <input type="checkbox" id="salad" name="food" value="salad">
+            <label for="salad">Salad</label><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" required><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" required><br><br>
+        </div>
+
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <table id="dataTable" class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Pin Code</th>
+                <th>Gender</th>
+                <th>Food</th>
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('form');
+        const dataTable = document.getElementById('dataTable');
+        const submitBtn = document.getElementById('submit');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const address = document.getElementById('address').value;
+            const pincode = document.getElementById('pincode').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const foodItems = document.querySelectorAll('input[name="food"]:checked');
+            const food = Array.from(foodItems).map(item => item.value).join(', ');
+            const state = document.getElementById('state').value;
+            const country = document.getElementById('country').value;
+
+            // Create table row
+            const newRow = document.createElement('tr');
+            const rowData = [firstName, lastName, address, pincode, gender, food, state, country];
+
+            // Add table data to row
+            rowData.forEach(data => {
+                const dataCell = document.createElement('td');
+                dataCell.textContent = data;
+                newRow.appendChild(dataCell);
+            });
+
+            // Add row to table
+            dataTable.querySelector('tbody').appendChild(newRow);
+
+            // Reset form
+            form.reset();
+        });
+    </script>
+     <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+</body>
+</html>
